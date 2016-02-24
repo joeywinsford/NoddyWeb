@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using Microsoft.Owin.Hosting;
 
 namespace NoddyWeb
@@ -7,7 +8,8 @@ namespace NoddyWeb
 	{
 		public static void Main(string[] args)
 		{
-			const string baseUrl = "http://localhost:12345/";
+			var host = ConfigurationManager.AppSettings["host"];
+			string baseUrl = $"http://{host}/";
 
 			using (WebApp.Start<Startup>(new StartOptions(baseUrl) { ServerFactory = "Microsoft.Owin.Host.HttpListener" }))
 			{
